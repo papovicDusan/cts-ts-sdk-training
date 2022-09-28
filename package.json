@@ -19,7 +19,8 @@
     "7a": "ts-node Task07a_custom_types.ts",
     "7b": "ts-node Task07b_custom_objects.ts",
     "7c": "ts-node Task07c_extensions.ts",
-    "8": "ts-node Task08_subscriptions.ts"
+    "8": "ts-node Task08_subscriptions.ts",
+    "debug": "ts-node Task03_import_sync_products.ts"
   },
   "keywords": [
     "commercetools",

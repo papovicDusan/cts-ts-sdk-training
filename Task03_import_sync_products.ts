@@ -1,16 +1,16 @@
 import {
-    checkImportOperationStatusById,
-    checkImportOperationsStatus,
-    checkImportSummary,
-    createImportContainer,
-    importProducts
+  checkImportOperationStatusById,
+  checkImportOperationsStatus,
+  checkImportSummary,
+  createImportContainer,
+  importProductDrafts,
 } from "./handson/importService";
 import { log } from "./utils/logger";
 
 const containerKey = "tt-ImportContainer";
 
 // Create an import container
-createImportContainer(containerKey).then(log).catch(log);
+// createImportContainer(containerKey).then(log).catch(log);
 
 // import products
 // importProductDrafts(containerKey).then(log).catch(log);
@@ -19,10 +19,10 @@ createImportContainer(containerKey).then(log).catch(log);
 // checkImportSummary(containerKey).then(log).catch(log);
 
 // check import operations for your container
-// checkImportOperationsStatus(containerKey).then(operations =>
-//     operations.body.results.forEach(operation =>
-//         log(operation.id + " : " + operation.state)
-//     )
+// checkImportOperationsStatus(containerKey).then((operations) =>
+//   operations.body.results.forEach((operation) =>
+//     log(operation.id + " : " + operation.state)
+//   )
 // );
 
 // Check the status of import operations by their Ids
