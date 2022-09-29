@@ -11,6 +11,24 @@ import {
 import csvtojsonV2 from "csvtojson";
 import { importApiRoot } from "./client";
 
+// import { ClientResponse, ProductType } from "@commercetools/platform-sdk";
+import { ProductType } from "@commercetools/platform-sdk";
+import { apiRoot } from "./client";
+
+export const createProductType = async (): Promise<
+  ClientResponse<ProductType>
+> =>
+  await apiRoot
+    .productTypes()
+    .post({
+      body: {
+        key: "sync-producttype",
+        name: "test_product_type",
+        description: "Test product type.",
+      },
+    })
+    .execute();
+
 export const createImportContainer = (
   key: string
 ): Promise<ClientResponse<ImportContainer>> => {

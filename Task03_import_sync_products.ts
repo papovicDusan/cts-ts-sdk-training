@@ -4,6 +4,7 @@ import {
   checkImportSummary,
   createImportContainer,
   importProductDrafts,
+  createProductType,
 } from "./handson/importService";
 import { log } from "./utils/logger";
 
@@ -11,6 +12,8 @@ const containerKey = "tt-ImportContainer";
 
 // Create an import container
 // createImportContainer(containerKey).then(log).catch(log);
+
+// createProductType().then(log).catch(log);
 
 // import products
 // importProductDrafts(containerKey).then(log).catch(log);

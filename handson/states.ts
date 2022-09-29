@@ -1,21 +1,48 @@
 import { ClientResponse, State, StateDraft } from "@commercetools/platform-sdk";
 import { apiRoot } from "./client";
 
-export const createNewState = (stateDraft: StateDraft): Promise<ClientResponse<State>> => {
-    throw new Error("Function not implemented");
-}
+export const createNewState = (
+  stateDraft: StateDraft
+): Promise<ClientResponse<State>> => {
+  return apiRoot
+    .states()
+    .post({
+      body: stateDraft,
+    })
+    .execute();
+};
 
 export const getStateByKey = (key: string): Promise<ClientResponse<State>> => {
-    throw new Error("Function not implemented");
-}
+  return apiRoot.states().withKey({ key: key }).get().execute();
+};
 
 export const getStateById = (ID: string) =>
-    apiRoot
-        .states()
-        .withId({ ID })
-        .get()
-        .execute();
+  apiRoot.states().withId({ ID }).get().execute();
 
-export const addTransition = (stateKey: string, transitionStateKeys: Array<string>): Promise<ClientResponse<State>> => {
-    throw new Error("Function not implemented");
-}
+export const addTransition = (
+  stateKey: string,
+  transitionStateKeys: Array<string>
+): Promise<ClientResponse<State>> => {
+  return getStateByKey(stateKey).then((state) =>
+    apiRoot
+      .states()
+      .withKey({ key: stateKey })
+      .post({
+        body: {
+          version: state.body.version,
+          actions: [
+            {
+              action: "setTransitions",
+              transitions: transitionStateKeys.map((key) => {
+                return {
+                  key,
+                  typeId: "state",
+                };
+              }),
+            },
+          ],
+        },
+      })
+      .execute()
+  );
+};
