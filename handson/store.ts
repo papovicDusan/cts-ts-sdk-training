@@ -28,13 +28,37 @@ export const addProductSelectionToStore = (
   storeKey: string,
   productSelectionKey: string
 ): Promise<ClientResponse<Store>> => {
-  throw new Error("Function not implemented");
+  return getStoreByKey(storeKey).then((store) =>
+    apiRoot
+      .stores()
+      .withKey({ key: storeKey })
+      .post({
+        body: {
+          version: store.body.version,
+          actions: [
+            {
+              action: "addProductSelection",
+              productSelection: {
+                key: productSelectionKey,
+                typeId: "product-selection",
+              },
+              //   active: true,
+            },
+          ],
+        },
+      })
+      .execute()
+  );
 };
 
 export const getProductsInStore = (
   storeKey: string
 ): Promise<ClientResponse<ProductsInStorePagedQueryResponse>> => {
-  throw new Error("Function not implemented");
+  return apiRoot
+    .inStoreKeyWithStoreKeyValue({ storeKey: storeKey })
+    .productSelectionAssignments()
+    .get()
+    .execute();
 };
 
 export const createInStoreCart = (
